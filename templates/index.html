@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+    <h1>Who Works Where?</h1>
+
+{% endblock %}   
+
+{% block body %}
+ 
+    <table>
+        <tr>
+            <th>Simulator Name</th>
+            <th>Current logged in user</th>
+        </tr>
+
+        {% for ip, status in simu_status %}
+            <tr>
+                <td>{{ ip }}</td>
+                <td>{{ status }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}
