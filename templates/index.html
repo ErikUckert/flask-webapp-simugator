@@ -2,7 +2,10 @@
 
 {% block head %}
 
-    <h1>Who Works Where?</h1>
+    <h1>.simugator</h1>
+    <hr>
+    <p>Check if your machine is available!</p>
+    <p>By hovering over each row, you can check the current installed base, or the last  known user, if you wish to contact them.</p>
 
 {% endblock %}   
 
@@ -10,17 +13,35 @@
  
     <table>
         <tr>
-            <th>Simulator Name</th>
-            <th>Current logged in user</th>
+            <th>Network Name</th>
+            <th>Current User</th>
         </tr>
 
         {% for ip, status in simu_status %}
+            
             <tr>
-                <td>{{ ip }}</td>
-                <td>{{ status }}</td>
+                <td class="has_tooltip">{{ ip }}<div class="tooltip">Here you can find more infos on the selected simulator...</div></td>
+                <td class="has_tooltip">
+                    {% for user in status[0] %}
+                        {{user}}
+                    {% endfor %}
+                <div class="tooltip">
+                    {% if status[1] == 'Name not found...' %}
+                        seems like no one was here before... </div></td>
+                    {% else %}
+                        {{status[1]}} was the last user on this machine </div></td>
+                    {% endif %}
+                <td class="no_hover"><div {% if status[0][0] == 'no user connected' %} class="green_dot" {% else %} class="red_dot" {% endif %}></div></td>
+                    
             </tr>
+            
         {% endfor %}
 
     </table>
 
+{% endblock %}
+
+{% block footy %}
+    <hr>
+    <p class="betaflag">beta version <br> for feedback mail to </p>
 {% endblock %}
